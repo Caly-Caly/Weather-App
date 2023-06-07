@@ -37,9 +37,29 @@ let dateDisplay = document.querySelector("#currentDate");
 let currentTime = new Date();
 dateDisplay.innerHTML = formatDate(currentTime);
 
+function defaultTempDisplay(response) {
+  let defaultDisplayCity = document.querySelector("h1");
+  let displayDefaultTemper = document.querySelector("#celcius");
+  let wDescriptionDisplay = document.querySelector("#weatherConditions");
+  let humidityElement = document.querySelector("#humidity");
+  let precipitation = document.querySelector("#precipitation");
+  let windMPH = document.querySelector("#windSpeed");
+  defaultDisplayCity.innerHTML = response.data.name;
+  displayDefaultTemper.innerHTML = Math.round(response.data.main.temp);
+  wDescriptionDisplay.innerHTML = response.data.weather[0].description;
+  humidityElement.innerHTML = response.data.main.humidity;
+  precipitation.innerHTML = response.data.clouds.all;
+  windMPH.innerHTML = Math.round(response.data.wind.speed);
+}
+
+let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+
+axios.get(apiUrl).then(defaultTempDisplay);
+
 function cityChange(event) {
   event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
+  let searchInput = document.querySelector("#search-input").value;
   let newCityName = document.querySelector("#cityName");
   newCityName.innerHTML = `${searchInput.value}`;
 }
@@ -54,8 +74,7 @@ function showTemperature(response) {
 
   // Main TEMP Display & Code
   let displayTemp = document.querySelector("#celcius");
-  let temp = Math.round(response.data.main.temp);
-  displayTemp.innerHTML = `${temp}`;
+  displayTemp.innerHTML = Math.round(response.data.main.temp);
 
   // Weather Conditions Display & Code
   let weatherDisplay = document.querySelector("#weatherConditions");
@@ -63,18 +82,15 @@ function showTemperature(response) {
 
   // Humidity Percentage Display & Code
   let humidityDisplay = document.querySelector("#humidity");
-  let humidity = response.data.main.humidity;
-  humidityDisplay.innerHTML = `Humidity: ${humidity}%`;
+  humidityDisplay.innerHTML = response.data.main.humidity;
 
   // Precipitation Display & Code
   let precipitationDisplay = document.querySelector("#precipitation");
-  let precipitation = response.data.clouds.all;
-  precipitationDisplay.innerHTML = `Precipitation: ${precipitation}%`;
+  precipitationDisplay.innerHTML = response.data.clouds.all;
 
   // Wind Speed Display & Code
   let windDisplay = document.querySelector("#windSpeed");
-  let windSpeed = Math.round(response.data.wind.speed);
-  windDisplay.innerHTML = `Wind: ${windSpeed}mph`;
+  windDisplay.innerHTML = Math.round(response.data.wind.speed);
 }
 
 let searchButton = document.querySelector("#searchButton");
@@ -94,10 +110,9 @@ function locatingCity(city) {
 
 function pinPoint(response) {
   let h1 = document.querySelector("h1");
-  let temperature = Math.round(response.data.main.temp);
-  h1.innerHTML = `${response.data.name} `;
   let celcius = document.querySelector("#celcius");
-  celcius.innerHTML = ` ${temperature} `;
+  h1.innerHTML = response.data.name;
+  celcius.innerHTML = Math.round(response.data.main.temp);
 }
 
 function retrievePosition(position) {
@@ -106,6 +121,7 @@ function retrievePosition(position) {
   let apiKey2 = "5f472b7acba333cd8a035ea85a0d4d4c";
   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey2}`;
   axios.get(url).then(pinPoint);
+  c;
 }
 
 function getCurrentPosition() {

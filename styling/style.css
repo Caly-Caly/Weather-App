@@ -30,6 +30,7 @@ li {
   height: 19px;
   line-height: 1px;
   list-style: none;
+  text-transform: capitalize;
 }
 
 ul {
@@ -129,6 +130,7 @@ ul {
 }
 
 .weather-pics {
+  font-size: 45px;
   width: 65px;
 }
 
@@ -142,6 +144,7 @@ ul {
 .units {
   position: relative;
   top: -32px;
+  right: 5px;
 }
 
 @media (min-width: 1200px) {
