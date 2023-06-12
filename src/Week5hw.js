@@ -27,15 +27,17 @@ function formatDate(timestamp) {
 function displayWeatherInfo(response) {
   console.log(response);
   let displayCity = document.querySelector("h1");
-  let displayTemper = document.querySelector("#celcius");
+  let displayTemper = document.querySelector("#tempDisplay");
   let DescriptionElement = document.querySelector("#weatherConditions");
   let humidityElement = document.querySelector("#humidity");
   let windMPH = document.querySelector("#windSpeed");
   let imageElement = document.querySelector("#icon");
   let dateElement = document.querySelector("#date");
 
+  celsiusTemp = response.data.temperature.current;
+
   displayCity.innerHTML = response.data.city;
-  displayTemper.innerHTML = Math.round(response.data.temperature.current);
+  displayTemper.innerHTML = Math.round(celsiusTemp);
   DescriptionElement.innerHTML = response.data.condition.description;
   humidityElement.innerHTML = response.data.temperature.humidity;
   windMPH.innerHTML = Math.round(response.data.wind.speed);
@@ -63,16 +65,41 @@ function handleSubmit(event) {
   console.log(cityInputElement.value);
 }
 
-search("New York");
+function displayImperialTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#tempDisplay");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayMetricTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#tempDisplay");
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemp);
+}
+
+let celsiusTemp = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-converter");
+fahrenheitLink.addEventListener("click", displayImperialTemp);
+
+let celsiusLink = document.querySelector("#celsius-converter");
+celsiusLink.addEventListener("click", displayMetricTemp);
+
+search("New York");
 
 // The following code below provides function to the "Current location" Button
 
 function pinPoint(response) {
   let h1 = document.querySelector("h1");
-  let celcius = document.querySelector("#celcius");
+  let celcius = document.querySelector("#tempDisplay");
   let windSpeed = document.querySelector("#windSpeed");
   let humidityPercentage = document.querySelector("#humidity");
   h1.innerHTML = response.data.city;

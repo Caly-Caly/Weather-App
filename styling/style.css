@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: "Noto Sans", sans-serif;
 }
@@ -87,6 +91,10 @@ ul {
   margin-bottom: auto;
 }
 
+.container2:hover {
+  cursor: default;
+}
+
 .date {
   color: #41b8d3;
   font-style: italic;
@@ -104,7 +112,7 @@ ul {
   height: 2px;
 }
 
-.displayedWIcon {
+.displayedWeatherIcon {
   position: relative;
   bottom: 16px;
 }
@@ -146,6 +154,11 @@ ul {
 .weather-info {
   font-size: 14px;
   margin-top: 5px;
+}
+
+.weather-temperature .active {
+  color: rgb(33, 33, 33);
+  cursor: default;
 }
 
 .weather-pics {
