@@ -1,8 +1,15 @@
-function formatDate(date) {
-  let now = new Date();
-  let presentDate = now.getDate();
-  let minutes = now.getMinutes();
-  let hours = now.getHours();
+// The code below is powering the default city displayed when you first open the website.
+
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
   let days = [
     "Sunday",
     "Monday",
@@ -12,110 +19,56 @@ function formatDate(date) {
     "Friday",
     "Saturday",
   ];
-  let day = days[now.getDay()];
-  let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  let day = days[date.getDay()];
 
-  let month = months[now.getMonth()];
-
-  return `${day}, ${month} ${presentDate}, ${hours}:${minutes}`;
+  return `${day} ${hours}:${minutes}`;
 }
 
-let dateDisplay = document.querySelector("#currentDate");
-let currentTime = new Date();
-dateDisplay.innerHTML = formatDate(currentTime);
-
-function defaultTempDisplay(response) {
+function displayWeatherInfo(response) {
   console.log(response);
-  let defaultDisplayCity = document.querySelector("h1");
-  let displayDefaultTemper = document.querySelector("#celcius");
-  let wDescriptionDisplay = document.querySelector("#weatherConditions");
+  let displayCity = document.querySelector("h1");
+  let displayTemper = document.querySelector("#celcius");
+  let DescriptionElement = document.querySelector("#weatherConditions");
   let humidityElement = document.querySelector("#humidity");
   let windMPH = document.querySelector("#windSpeed");
   let imageElement = document.querySelector("#icon");
-  defaultDisplayCity.innerHTML = response.data.city;
-  displayDefaultTemper.innerHTML = Math.round(
-    response.data.temperature.current
-  );
-  wDescriptionDisplay.innerHTML = response.data.condition.description;
+  let dateElement = document.querySelector("#date");
+
+  displayCity.innerHTML = response.data.city;
+  displayTemper.innerHTML = Math.round(response.data.temperature.current);
+  DescriptionElement.innerHTML = response.data.condition.description;
   humidityElement.innerHTML = response.data.temperature.humidity;
   windMPH.innerHTML = Math.round(response.data.wind.speed);
   imageElement.setAttribute(
     "src",
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
+  imageElement.setAttribute("alt", response.data.condition.description);
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
 }
 
-let apiKey = "744441eb32ea7ceo3fb901c610f1d4t9";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=New York&key=${apiKey}&units=metric`;
+// The code below is powering the " city search" button.
 
-axios.get(apiUrl).then(defaultTempDisplay);
-
-function cityChange(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-input").value;
-  let newCityName = document.querySelector("#cityName");
-  newCityName.innerHTML = `${searchInput.value}`;
-}
-
-let cityForm = document.querySelector("#city-form");
-cityForm.addEventListener("submit", cityChange);
-
-function showTemperature(response) {
-  // City Search Display & Code
-  let city = document.querySelector("h1");
-  city.innerHTML = response.data.city;
-
-  // Main TEMP Display & Code
-  let displayTemp = document.querySelector("#celcius");
-  displayTemp.innerHTML = Math.round(response.data.temperature.current);
-
-  // Weather Conditions Display & Code
-  let weatherDisplay = document.querySelector("#weatherConditions");
-  weatherDisplay.innerHTML = response.data.condition.description;
-
-  // Humidity Percentage Display & Code
-  let humidityDisplay = document.querySelector("#humidity");
-  humidityDisplay.innerHTML = response.data.temperature.humidity;
-
-  // Wind Speed Display & Code
-  let windDisplay = document.querySelector("#windSpeed");
-  windDisplay.innerHTML = Math.round(response.data.wind.speed);
-
-  // Icon Display Image & Code
-  let imageDisplay = document.querySelector("#icon");
-  imageDisplay.setAttribute(
-    "src",
-    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
-  );
-}
-
-let searchButton = document.querySelector("#searchButton");
-searchButton.addEventListener("click", locateACity);
-
-function locateACity(event) {
-  event.preventDefault();
-  let city = document.querySelector("#search-input").value;
-  locatingCity(city);
-}
-function locatingCity(city) {
+function search(city) {
   let apiKey = "744441eb32ea7ceo3fb901c610f1d4t9";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
-  axios.get(apiUrl).then(showTemperature);
+  axios.get(apiUrl).then(displayWeatherInfo);
 }
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+  console.log(cityInputElement.value);
+}
+
+search("New York");
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
+// The following code below provides function to the "Current location" Button
 
 function pinPoint(response) {
   let h1 = document.querySelector("h1");

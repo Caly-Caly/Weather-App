@@ -104,9 +104,27 @@ ul {
   height: 2px;
 }
 
+.displayedWIcon {
+  position: relative;
+  bottom: 16px;
+}
+
 .g-lg-3 {
   margin-left: 10px;
   margin-bottom: 15px;
+}
+
+.temperature {
+  color: #000000;
+  font-size: 64px;
+  font-weight: 300px;
+  line-height: 0.5px;
+}
+
+.units {
+  position: relative;
+  top: -32px;
+  right: 5px;
 }
 
 .weather-app {
@@ -127,24 +145,12 @@ ul {
 }
 .weather-info {
   font-size: 14px;
+  margin-top: 5px;
 }
 
 .weather-pics {
   font-size: 45px;
   width: 65px;
-}
-
-.temperature {
-  color: #000000;
-  font-size: 64px;
-  font-weight: 300px;
-  line-height: 0.5px;
-}
-
-.units {
-  position: relative;
-  top: -32px;
-  right: 5px;
 }
 
 @media (min-width: 1200px) {
