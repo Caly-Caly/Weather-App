@@ -24,6 +24,28 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Wed", "Thur", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+          <div class="forecast-date">${day}</div>
+          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png" width="70">
+          <div class="weather-forecast-temperatures">
+          <span class="high-temp">65°</span>
+          <span class="low-temp">54°</span>
+          </div>
+          </div>
+          `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayWeatherInfo(response) {
   console.log(response);
   let displayCity = document.querySelector("h1");
@@ -94,6 +116,8 @@ let celsiusLink = document.querySelector("#celsius-converter");
 celsiusLink.addEventListener("click", displayMetricTemp);
 
 search("New York");
+
+displayForecast();
 
 // The following code below provides function to the "Current location" Button
 
