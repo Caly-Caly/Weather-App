@@ -24,7 +24,8 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -44,6 +45,13 @@ function displayForecast() {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(city) {
+  let apiKey = "744441eb32ea7ceo3fb901c610f1d4t9";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city.city}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayWeatherInfo(response) {
@@ -69,6 +77,8 @@ function displayWeatherInfo(response) {
   );
   imageElement.setAttribute("alt", response.data.condition.description);
   dateElement.innerHTML = formatDate(response.data.time * 1000);
+
+  getForecast(response.data);
 }
 
 // The code below is powering the " city search" button.
@@ -115,9 +125,7 @@ fahrenheitLink.addEventListener("click", displayImperialTemp);
 let celsiusLink = document.querySelector("#celsius-converter");
 celsiusLink.addEventListener("click", displayMetricTemp);
 
-search("New York");
-
-displayForecast();
+search("Brooklyn");
 
 // The following code below provides function to the "Current location" Button
 
