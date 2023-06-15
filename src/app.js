@@ -24,26 +24,45 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatTimeStamp(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Wed", "Thur", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-          <div class="forecast-date">${day}</div>
-          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png" width="70">
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+          <div class="forecast-date">${formatTimeStamp(forecastDay.time)}</div>
+          
+          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+            forecastDay.condition.icon
+          }.png" width="70">
           <div class="weather-forecast-temperatures">
-          <span class="high-temp">65°</span>
-          <span class="low-temp">54°</span>
+          <span class="high-temp">${Math.round(
+            forecastDay.temperature.maximum
+          )}°</span>
+          <span class="low-temp">${Math.round(
+            forecastDay.temperature.minimum
+          )}°</span>
           </div>
           </div>
           `;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
+
   forecastElement.innerHTML = forecastHTML;
 }
 
@@ -55,7 +74,6 @@ function getForecast(city) {
 }
 
 function displayWeatherInfo(response) {
-  console.log(response);
   let displayCity = document.querySelector("h1");
   let displayTemper = document.querySelector("#tempDisplay");
   let DescriptionElement = document.querySelector("#weatherConditions");
@@ -94,7 +112,6 @@ function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
-  console.log(cityInputElement.value);
 }
 
 function displayImperialTemp(event) {
@@ -130,6 +147,7 @@ search("Brooklyn");
 // The following code below provides function to the "Current location" Button
 
 function pinPoint(response) {
+  console.log(response);
   let h1 = document.querySelector("h1");
   let celcius = document.querySelector("#tempDisplay");
   let windSpeed = document.querySelector("#windSpeed");
@@ -145,7 +163,7 @@ function retrievePosition(position) {
   let lon = position.coords.longitude;
   let lat = position.coords.latitude;
   let apiKey2 = "744441eb32ea7ceo3fb901c610f1d4t9";
-  let url = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey2}&units=metric`;
+  let url = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey2}`;
   axios.get(url).then(pinPoint);
 }
 

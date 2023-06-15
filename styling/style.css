@@ -6,6 +6,10 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 
+footer {
+  text-align: center;
+}
+
 h1 {
   color: #494949;
   font-size: 28px;
@@ -23,10 +27,6 @@ h3 {
   font-size: 25px;
 }
 
-footer {
-  text-align: center;
-}
-
 li {
   color: #606060;
   font-size: 16;
@@ -42,20 +42,16 @@ ul {
   padding: 0;
 }
 
-.border-secondary-subtle {
-  border-width: 0 !important;
-  border-color: #919191 !important;
-}
-.btn-danger,
-.btn-info {
-  margin-left: 5px;
-  margin-bottom: 5px;
-}
-
 .btn-danger {
   color: #fff;
   background-color: #f7aa00;
   border-color: #f7aa00;
+}
+
+.btn-danger,
+.btn-info {
+  margin-left: 5px;
+  margin-bottom: 5px;
 }
 
 .btn-danger:hover,
@@ -64,17 +60,18 @@ ul {
   border-color: #df9b07 !important;
   color: #fff !important;
 }
-.btn-info {
-  color: #fff;
-  background-color: #76c38c;
-  border-color: #76c38c;
-}
 
 .btn-info:hover,
 .btn-info:active {
   background-color: #6fb984 !important;
   border-color: #6fb984 !important;
   color: #fff !important;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #76c38c;
+  border-color: #76c38c;
 }
 
 .cloudy-sun {
@@ -107,6 +104,12 @@ ul {
   font-weight: bold;
 }
 
+.degreeUnits {
+  position: relative;
+  top: -32px;
+  right: 3px;
+}
+
 .divider {
   color: #000;
   height: 2px;
@@ -117,9 +120,19 @@ ul {
   bottom: 16px;
 }
 
-.g-lg-3 {
-  margin-left: 10px;
-  margin-bottom: 15px;
+.future-forecast {
+  margin-bottom: 20px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.forecast-date {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.low-temp {
+  opacity: 0.8;
 }
 
 .temperature {
@@ -127,12 +140,6 @@ ul {
   font-size: 64px;
   font-weight: 300px;
   line-height: 0.5px;
-}
-
-.units {
-  position: relative;
-  top: -32px;
-  right: 5px;
 }
 
 .weather-app {
@@ -151,6 +158,11 @@ ul {
 .weatherCondition {
   margin-bottom: 10px;
 }
+
+.weather-forecast-temperatures {
+  font-size: 14px;
+}
+
 .weather-info {
   font-size: 14px;
   margin-top: 5px;
@@ -165,24 +177,6 @@ ul {
   font-size: 45px;
   margin-bottom: 8px;
   width: 65px;
-}
-
-.future-forecast {
-  margin-top: 8px;
-  text-align: center;
-}
-
-.forecast-date {
-  font-size: 16px;
-  opacity: 0.7;
-}
-
-.low-temp {
-  opacity: 0.7;
-}
-
-.weather-forecast-temperatures {
-  font-size: 14px;
 }
 
 @media (min-width: 1200px) {
