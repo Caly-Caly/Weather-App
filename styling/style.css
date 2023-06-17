@@ -42,16 +42,16 @@ ul {
   padding: 0;
 }
 
-.btn-danger {
-  color: #fff;
-  background-color: #f7aa00;
-  border-color: #f7aa00;
-}
-
 .btn-danger,
 .btn-info {
   margin-left: 5px;
   margin-bottom: 5px;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #f7aa00;
+  border-color: #f7aa00;
 }
 
 .btn-danger:hover,
@@ -60,26 +60,17 @@ ul {
   border-color: #df9b07 !important;
   color: #fff !important;
 }
-
-.btn-info:hover,
-.btn-info:active {
-  background-color: #6fb984 !important;
-  border-color: #6fb984 !important;
-  color: #fff !important;
-}
-
 .btn-info {
   color: #fff;
   background-color: #76c38c;
   border-color: #76c38c;
 }
 
-.cloudy-sun {
-  left: 90px;
-  margin: 0 auto;
-  position: relative;
-  top: 15px;
-  width: 105px;
+.btn-info:hover,
+.btn-info:active {
+  background-color: #6fb984 !important;
+  border-color: #6fb984 !important;
+  color: #fff !important;
 }
 
 .container2 {
@@ -120,9 +111,13 @@ ul {
   bottom: 16px;
 }
 
-.future-forecast {
+.formStructure {
   margin-bottom: 20px;
-  margin-top: 15px;
+}
+
+.future-forecast {
+  margin-top: 8px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -143,11 +138,6 @@ ul {
 }
 
 .weather-app {
-  background: linear-gradient(
-    179.7deg,
-    rgb(197, 214, 227) 2.9%,
-    rgb(145, 184, 218) 97.1%
-  );
   border: 1px solid #878787;
   border-radius: 10px;
   padding: 15px;
@@ -171,12 +161,6 @@ ul {
 .weather-temperature .active {
   color: rgb(33, 33, 33);
   cursor: default;
-}
-
-.weather-pics {
-  font-size: 45px;
-  margin-bottom: 8px;
-  width: 65px;
 }
 
 @media (min-width: 1200px) {
