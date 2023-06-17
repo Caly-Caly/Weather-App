@@ -31,7 +31,6 @@ function formatTimeStamp(timestamp) {
 
   return days[day];
 }
-
 function displayForecast(response) {
   let forecast = response.data.daily;
 
@@ -114,62 +113,9 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-function displayImperialTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#tempDisplay");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
-function displayMetricTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#tempDisplay");
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  temperatureElement.innerHTML = Math.round(celsiusTemp);
-}
-
 let celsiusTemp = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-let fahrenheitLink = document.querySelector("#fahrenheit-converter");
-fahrenheitLink.addEventListener("click", displayImperialTemp);
-
-let celsiusLink = document.querySelector("#celsius-converter");
-celsiusLink.addEventListener("click", displayMetricTemp);
-
 search("Brooklyn");
-
-// The following code below provides function to the "Current location" Button
-
-function pinPoint(response) {
-  console.log(response);
-  let h1 = document.querySelector("h1");
-  let celcius = document.querySelector("#tempDisplay");
-  let windSpeed = document.querySelector("#windSpeed");
-  let humidityPercentage = document.querySelector("#humidity");
-  h1.innerHTML = response.data.city;
-  celcius.innerHTML = Math.round(response.data.daily[0].temperature.day);
-  windSpeed.innerHTML = Math.round(response.data.daily[0].wind.speed);
-  humidityPercentage.innerHTML = response.data.daily[0].temperature.humidity;
-}
-
-function retrievePosition(position) {
-  console.log(position);
-  let lon = position.coords.longitude;
-  let lat = position.coords.latitude;
-  let apiKey2 = "744441eb32ea7ceo3fb901c610f1d4t9";
-  let url = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey2}`;
-  axios.get(url).then(pinPoint);
-}
-
-function getCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(retrievePosition);
-}
-
-let button = document.querySelector("button");
-button.addEventListener("click", getCurrentPosition);
