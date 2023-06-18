@@ -24,6 +24,7 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+// Timestamp Function
 function formatTimeStamp(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -31,12 +32,12 @@ function formatTimeStamp(timestamp) {
 
   return days[day];
 }
+
+// Future Forecast function below
 function displayForecast(response) {
   let forecast = response.data.daily;
-
   let forecastElement = document.querySelector("#forecast");
-
-  let forecastHTML = `<div class="row">`;
+  let forecastHTML = `<div class="boxoutline row">`;
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
@@ -49,10 +50,10 @@ function displayForecast(response) {
             forecastDay.condition.icon
           }.png" width="70">
           <div class="weather-forecast-temperatures">
-          <span class="high-temp">${Math.round(
+          <span id="highTemp" class="high-temp">${Math.round(
             forecastDay.temperature.maximum
           )}°</span>
-          <span class="low-temp">${Math.round(
+          <span id="lowTemp" class="low-temp">${Math.round(
             forecastDay.temperature.minimum
           )}°</span>
           </div>
@@ -65,6 +66,7 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
+// Forecast coordinates function
 function getForecast(coordinates) {
   let apiKey = "744441eb32ea7ceo3fb901c610f1d4t9";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
@@ -72,6 +74,7 @@ function getForecast(coordinates) {
   axios.get(apiUrl).then(displayForecast);
 }
 
+// Weather HTML elements displayed with assigned API items
 function displayWeatherInfo(response) {
   console.log(response);
   let displayCity = document.querySelector("h1");
@@ -104,7 +107,6 @@ function displayWeatherInfo(response) {
 }
 
 // The code below is powering the " city search" button.
-
 function search(city) {
   let apiKey = "744441eb32ea7ceo3fb901c610f1d4t9";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
@@ -112,6 +114,7 @@ function search(city) {
   axios.get(apiUrl).then(displayWeatherInfo);
 }
 
+// Function below is the users city names input
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
@@ -124,6 +127,7 @@ function handleSubmit(event) {
   }
 }
 
+// Imperial Converter function below
 function displayImperialTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#tempDisplay");
@@ -133,6 +137,7 @@ function displayImperialTemp(event) {
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
+// Metrics Converter function below
 function displayMetricTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#tempDisplay");
@@ -155,7 +160,6 @@ celsiusLink.addEventListener("click", displayMetricTemp);
 search("Brooklyn");
 
 // The following code below provides function to the "Current location" Button
-
 function retrievePosition(position) {
   console.log(position);
   let lon = position.coords.longitude;
