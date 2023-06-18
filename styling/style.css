@@ -4,6 +4,8 @@ a {
 
 body {
   font-family: "Noto Sans", sans-serif;
+  background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  width: 100%;
 }
 
 footer {
@@ -16,6 +18,10 @@ h1 {
   font-weight: 100;
   line-height: 28px;
   margin-bottom: 12px;
+}
+
+html {
+  height: 100%;
 }
 
 li {
@@ -147,11 +153,11 @@ ul {
 }
 
 .weather-app {
-  border: 1px solid #878787;
+  border: 1px solid #ffffff !important;
   border-radius: 10px;
   box-shadow: 6px 8px 5px rgb(131, 131, 131);
   padding: 15px;
-  margin: 20px auto;
+  margin: 70px auto;
   max-width: 800px;
 }
 
@@ -166,6 +172,22 @@ ul {
 .weather-info {
   font-size: 14px;
   margin-top: 5px;
+}
+
+.weatherInfoList:hover {
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scale(1.1);
+  max-width: 100%;
+}
+
+.weather-temperature:hover {
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scale(1.1);
+  max-width: 100%;
 }
 
 .weather-temperature .active {
