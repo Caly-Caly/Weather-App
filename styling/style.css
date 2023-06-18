@@ -99,10 +99,17 @@ ul {
   font-weight: bold;
 }
 
-.degreeUnits {
+.units {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: -10px;
+  padding-bottom: 56.5px;
+  padding-right: 5px;
+  padding-top: 21.5px;
   position: relative;
   top: -32px;
-  right: 3px;
+  right: 4px;
 }
 
 .divider {
@@ -112,7 +119,7 @@ ul {
 
 .displayedWeatherIcon {
   background-color: rgba(255, 255, 255, 0.3);
-  border-top-left-radius: 10px;
+  border-top-left-radius: 11px;
   border-bottom-left-radius: 10px;
   position: relative;
   bottom: 16px;
@@ -141,8 +148,6 @@ ul {
 
 .temperature {
   background-color: rgba(255, 255, 255, 0.3);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
   color: #000000;
   font-size: 64px;
   font-weight: 300px;
@@ -157,7 +162,7 @@ ul {
   border-radius: 10px;
   box-shadow: 6px 8px 5px rgb(131, 131, 131);
   padding: 15px;
-  margin: 70px auto;
+  margin-top: 80px;
   max-width: 800px;
 }
 

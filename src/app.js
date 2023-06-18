@@ -127,35 +127,10 @@ function handleSubmit(event) {
   }
 }
 
-// Imperial Converter function below
-function displayImperialTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#tempDisplay");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
-// Metrics Converter function below
-function displayMetricTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#tempDisplay");
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  temperatureElement.innerHTML = Math.round(celsiusTemp);
-}
-
 let celsiusTemp = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
-
-let fahrenheitLink = document.querySelector("#fahrenheit-converter");
-fahrenheitLink.addEventListener("click", displayImperialTemp);
-
-let celsiusLink = document.querySelector("#celsius-converter");
-celsiusLink.addEventListener("click", displayMetricTemp);
 
 search("Brooklyn");
 
